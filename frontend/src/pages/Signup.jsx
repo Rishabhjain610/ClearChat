@@ -4,6 +4,8 @@ import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ServerContext1 } from "../context/ServerContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "../redux/userSlice";
 const Signup = () => {
   const [form, setForm] = useState({
     username: "",
@@ -15,6 +17,9 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { serverUrl } = React.useContext(ServerContext1);
+  const dispatch = useDispatch();
+  const {userData}=useSelector((state) => state.user);
+  console.log(userData)
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -26,7 +31,8 @@ const Signup = () => {
       const result = await axios.post(`${serverUrl}/api/auth/signup`, form, {
         withCredentials: true,
       });
-      console.log(result);
+      dispatch(setUserData(result.data.user));
+
       if (result.data.token) {
         toast.success("Signup successful");
         navigate("/");

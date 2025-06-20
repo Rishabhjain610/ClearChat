@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 import { ServerContext1 } from "../context/ServerContext";
 const Login = () => {
   const [form, setForm] = useState({
@@ -16,6 +17,10 @@ const Login = () => {
   const changepassword = () => {
     setShowPassword(!showPassword);
   };
+  const dispatch = useDispatch();
+  const {userData}=useSelector((state) => state.user);
+  console.log(userData);
+
   const { serverUrl } = useContext(ServerContext1);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,6 +34,8 @@ const Login = () => {
         withCredentials: true,
       });
       console.log(result);
+      dispatch(setUserData(result.data.user));
+
       if (result.data.token) {
         toast.success("Login successful");
         navigate("/");
