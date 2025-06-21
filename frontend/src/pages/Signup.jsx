@@ -18,8 +18,8 @@ const Signup = () => {
   const navigate = useNavigate();
   const { serverUrl } = React.useContext(ServerContext1);
   const dispatch = useDispatch();
-  const {userData}=useSelector((state) => state.user);
-  console.log(userData)
+  
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };

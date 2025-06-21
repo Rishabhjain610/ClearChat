@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, use } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import axios from "axios";
@@ -18,8 +18,7 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   const dispatch = useDispatch();
-  const {userData}=useSelector((state) => state.user);
-  console.log(userData);
+  
 
   const { serverUrl } = useContext(ServerContext1);
   const handleChange = (e) => {
