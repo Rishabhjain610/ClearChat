@@ -1,10 +1,11 @@
-import React, { useState, useContext, use } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { ServerContext1 } from "../context/ServerContext";
+import { setUserData } from "../redux/userSlice";
 const Login = () => {
   const [form, setForm] = useState({
     email: "",
@@ -62,6 +63,7 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="email"
+              value={form.email}
               onChange={handleChange}
               required
               className="w-full outline-none bg-transparent text-base sm:text-lg"
@@ -73,6 +75,7 @@ const Login = () => {
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Password"
+              value={form.password}
               onChange={handleChange}
               required
               className="w-full outline-none bg-transparent text-base sm:text-lg"

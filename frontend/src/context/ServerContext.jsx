@@ -11,11 +11,11 @@ const ServerContext = ({children}) => {
   }
 
   return (
-    <div>
+    
       <ServerContext1.Provider value={value}>
         {children}
       </ServerContext1.Provider>
-    </div>
+   
   )
 }
 
