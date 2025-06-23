@@ -1,11 +1,12 @@
 const User = require("../model/User.model");
-const getCurrentUser =async (req, res) => {
+const { uploadOnCloudinary } = require("../utils/cloudinary");
+const getCurrentUser = async (req, res) => {
   try {
     const userID = req.userId; // Assuming userId is set by authCheck middleware
     if (!userID) {
       return res.status(401).json({ message: "Unauthorized" });
     }
-    const user=await User.findById(userID).select("-password");
+    const user = await User.findById(userID).select("-password");
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -13,7 +14,33 @@ const getCurrentUser =async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Error fetching user data" });
-    
   }
-}
-module.exports = { getCurrentUser };
+};
+
+
+const editProfile = async (req, res) => {
+  try {
+    const { name } = req.body;
+    let image;
+    if (req.file) {
+      image = await uploadOnCloudinary(req.file.path);
+    }
+
+    // Build update object dynamically
+    const updateData = { name };
+    if (image) updateData.image = image;
+
+    const user = await User.findByIdAndUpdate(req.userId, updateData, {
+      new: true,
+    }).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error updating profile" });
+  }
+};
+module.exports = { getCurrentUser, editProfile };

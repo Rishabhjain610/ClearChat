@@ -1,23 +1,27 @@
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
+
+// Configure cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 const uploadOnCloudinary = async (filepath) => {
-  cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET, // Click 'View API Keys' above to copy your API secret
-  });
+  if (!filepath) return null;
   try {
-    if (!filepath) {
-      return res.status(400).json({ message: "File path is required" });
-    }
-    const uploadResult = await cloudinary.uploader.upload(filepath, {
-      folder: "ClearChat",
+    const result = await cloudinary.uploader.upload(filepath, {
+      folder: "clearchat-profile",
+      
     });
-    fs.unlinkSync(filepath); // Delete the file after upload
-    return uploadResult.secure_url; // Return the secure URL of the uploaded image
+    fs.unlinkSync(filepath); // Remove local file after upload
+    return result.secure_url;
   } catch (error) {
-    fs.unlinkSync(filepath); // Delete the file in case of error
-    console.error("Error uploading to Cloudinary:", error);
+    if (fs.existsSync(filepath)) fs.unlinkSync(filepath);
+    console.error("Cloudinary upload error:", error);
+    return null;
   }
 };
-module.exports = uploadOnCloudinary;
+
+module.exports = { uploadOnCloudinary };

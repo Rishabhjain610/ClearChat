@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
@@ -6,12 +7,20 @@ import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
-import useCurrentUser from "./customHooks/getCurrentUser";
+import useCurrentUser from "./customHooks/useCurrentUser";
 import { useSelector } from "react-redux";
 
 const App = () => {
   useCurrentUser();
-  const userData = useSelector((state) => state.user);
+  const { userData, loading } = useSelector((state) => state.user);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <span className="text-lg text-gray-600">Loading...</span>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -27,4 +36,3 @@ const App = () => {
 };
 
 export default App;
-// This code defines the main application component for a React application.

@@ -30,7 +30,7 @@ const Signup = async (req, res) => {
     const token = await genToken(newUser._id);
     res.cookie("token", token, {
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      maxAge: 1 * 24 * 60 * 60 * 1000, // 30 days
       sameSite: "Strict",
       secure: false, // Set to true if using HTTPS
     });
@@ -61,7 +61,7 @@ const login = async (req, res) => {
     const token = await genToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      maxAge: 1 * 24 * 60 * 60 * 1000, // 30 days
       sameSite: "Strict",
       secure: false, // Set to true if using HTTPS
     });
