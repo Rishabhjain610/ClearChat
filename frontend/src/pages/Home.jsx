@@ -1,9 +1,12 @@
-import React from 'react'
-
+import React,{ useState } from 'react'
+import SideBar from '../component/SideBar'
+import MessageArea from '../component/MessageArea'
 const Home = () => {
+
   return (
-    <div>
-      hi
+    <div className='flex h-screen w-full'>
+      <SideBar />
+      <MessageArea />
     </div>
   )
 }

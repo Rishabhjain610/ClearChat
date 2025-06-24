@@ -43,4 +43,17 @@ const editProfile = async (req, res) => {
     return res.status(500).json({ message: "Error updating profile" });
   }
 };
-module.exports = { getCurrentUser, editProfile };
+
+const getOtherUser=async(req,res)=>{
+  try {
+    const user =await User.find({
+      _id: { $ne: req.userId }, // Exclude current user
+    }).select("-password"); // Exclude password field
+    return res.status(200).json({ user:user });
+  } catch (error) {
+   
+    return res.status(500).json({ message: "Error fetching other user data" });
+    
+  }
+}
+module.exports = { getCurrentUser, editProfile, getOtherUser };

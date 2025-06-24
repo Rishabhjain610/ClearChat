@@ -9,9 +9,11 @@ import "./App.css";
 import { ToastContainer } from "react-toastify";
 import useCurrentUser from "./customHooks/useCurrentUser";
 import { useSelector } from "react-redux";
+import getOtherUsers from "./customHooks/getOtherUser";
 
 const App = () => {
   useCurrentUser();
+  getOtherUsers();
   const { userData, loading } = useSelector((state) => state.user);
 
   if (loading) {

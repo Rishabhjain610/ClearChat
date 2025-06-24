@@ -54,7 +54,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white px-2">
       <div className="w-full max-w-md md:max-w-lg lg:max-w-xl p-4 sm:p-8 bg-white rounded-xl shadow-lg">
         <form onSubmit={handleSubmit}>
-          <h2 className="text-blue-600 text-2xl sm:text-3xl font-bold text-center mb-8">
+          <h2 className="text-blue-400 text-2xl sm:text-3xl font-bold text-center mb-8">
             Login
           </h2>
           <div className="mb-4 flex items-center border border-blue-200 rounded-lg px-3 py-2">
@@ -70,7 +70,7 @@ const Login = () => {
             />
           </div>
           <div className="mb-6 flex items-center border border-blue-200 rounded-lg px-3 py-2 relative">
-            <Lock className="text-blue-500 mr-3" />
+            <Lock className="text-blue-400 mr-3" />
             <input
               type={showPassword ? "text" : "password"}
               name="password"
@@ -90,7 +90,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-colors text-base sm:text-lg"
+            className="w-full bg-blue-400 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-colors text-base sm:text-lg"
             disabled={loading}
           >
             {loading ? "Loading..." : "Login"}

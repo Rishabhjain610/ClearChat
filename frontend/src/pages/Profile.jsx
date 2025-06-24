@@ -65,7 +65,7 @@ const Profile = () => {
         onClick={() => navigate("/")}
         aria-label="Back to Home"
       >
-        <ArrowLeft className="text-blue-600" size={28} />
+        <ArrowLeft className="text-blue-400" size={28} />
       </button>
 
       <div className="relative mb-6 flex flex-col items-center">
@@ -78,7 +78,7 @@ const Profile = () => {
         </div>
         <button
           type="button"
-          className="absolute bottom-2 right-2 bg-blue-600 p-2 rounded-full cursor-pointer hover:bg-blue-700 transition-colors flex items-center justify-center"
+          className="absolute bottom-2 right-2 bg-blue-400 p-2 rounded-full cursor-pointer hover:bg-blue-500 transition-colors flex items-center justify-center"
           title="Change profile picture"
           onClick={() => image.current.click()}
         >
@@ -139,7 +139,7 @@ const Profile = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-colors text-lg mt-2 disabled:opacity-60"
+          className="w-full bg-blue-400 hover:bg-blue-500 text-white font-semibold py-2 rounded-lg transition-colors text-lg mt-2 disabled:opacity-60"
           disabled={loading}
         >
           {loading?"saving...":"Save profile"}
