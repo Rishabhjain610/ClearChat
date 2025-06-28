@@ -10,7 +10,7 @@ const getOtherUsers = () => {
   const { serverUrl } = useContext(ServerContext1);
   const dispatch = useDispatch();
   const othersUsers = useSelector((state) => state.user.othersUsers);
-
+  const userData= useSelector((state) => state.user.userData);
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -27,7 +27,7 @@ const getOtherUsers = () => {
     } else {
       dispatch(setLoading(false));
     }
-  }, [othersUsers, serverUrl, dispatch]);
+  }, [userData,othersUsers, serverUrl, dispatch]);
 };
 
 export default getOtherUsers;

@@ -11,7 +11,7 @@ import { setUserData } from "../redux/userSlice";
 const Profile = () => {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user.userData);
-
+ 
   // Always call hooks at the top
   const [name, setName] = useState(userData?.name || "");
   const [frontendImage, setFrontendImage] = useState(
@@ -22,6 +22,7 @@ const Profile = () => {
   const image = useRef(null);
   const dispatch = useDispatch();
   // Handler for camera icon click
+
   const handleImage = (e) => {
     const file = e.target.files[0];
     setBackendImage(file);
@@ -42,7 +43,8 @@ const Profile = () => {
       });
       dispatch(setUserData(result.data.user));
       setLoading(false);
-      toast.success("Profile updated successfully!");
+      toast.success("Profile updated successfully");
+      navigate("/");
     } catch (error) {
       setLoading(false);
       console.log("Error updating profile:", error);
