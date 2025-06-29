@@ -6,6 +6,7 @@ const AuthRouter = require("./routes/auth.routes");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const UserRouter = require("./routes/user.routes");
+const MessageRouter = require("./routes/message.routes");
 dotenv.config();
 const port = process.env.PORT || 3000;
 ConnectDB();
@@ -21,6 +22,7 @@ app.use(
 );
 app.use("/api/auth", AuthRouter);
 app.use("/api/user", UserRouter);
+app.use("/api/message", MessageRouter);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

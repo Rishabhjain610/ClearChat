@@ -1,4 +1,4 @@
-const User = require("../model/User.model");
+const User = require("../model/user.model");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const getCurrentUser = async (req, res) => {
   try {
@@ -16,7 +16,6 @@ const getCurrentUser = async (req, res) => {
     return res.status(500).json({ message: "Error fetching user data" });
   }
 };
-
 
 const editProfile = async (req, res) => {
   try {
@@ -44,16 +43,14 @@ const editProfile = async (req, res) => {
   }
 };
 
-const getOtherUser=async(req,res)=>{
+const getOtherUser = async (req, res) => {
   try {
-    const user =await User.find({
+    const user = await User.find({
       _id: { $ne: req.userId }, // Exclude current user
     }).select("-password"); // Exclude password field
-    return res.status(200).json({ user:user });
+    return res.status(200).json({ user: user });
   } catch (error) {
-   
     return res.status(500).json({ message: "Error fetching other user data" });
-    
   }
-}
+};
 module.exports = { getCurrentUser, editProfile, getOtherUser };
