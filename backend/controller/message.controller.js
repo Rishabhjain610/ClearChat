@@ -1,6 +1,6 @@
 const Message = require("../model/message.model");
 const Conversation = require("../model/conversation.model");
-const User = require("../model/user.model");
+
 
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const { getReceiverSocketId,io } = require("../socket/socket"); // Import the function to get receiver's socket ID
