@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { ServerContext1 } from "../context/ServerContext";
 import { setUserData, setLoading, setOtherUsers } from "../redux/userSlice";
+import { setMessages } from "../redux/messageSlice";
 
 const getMessages = () => {
   const { serverUrl } = useContext(ServerContext1);
@@ -13,20 +14,18 @@ const getMessages = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const result = await axios.get(`${serverUrl}/api/message/get/${selectedUser._id}`, {
+        const result = await axios.get(`${serverUrl}/api/message/messages/${selectedUser._id}`, {
           withCredentials: true,
         });
-        dispatch(setOtherUsers(result.data.user));
+        dispatch(setMessages(result.data.messages));
       } catch (error) {
         dispatch(setLoading(false));
       }
     };
-    if (!othersUsers) {
-      fetchUser();
-    } else {
-      dispatch(setLoading(false));
-    }
-  }, [userData, othersUsers, serverUrl, dispatch]);
+    if (selectedUser && userData) {
+  fetchMessages();
+}
+  }, [selectedUser,userData]);
 };
 
 export default getMessages;

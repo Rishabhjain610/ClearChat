@@ -53,4 +53,33 @@ const getOtherUser = async (req, res) => {
     return res.status(500).json({ message: "Error fetching other user data" });
   }
 };
-module.exports = { getCurrentUser, editProfile, getOtherUser };
+
+const searchUser = async (req, res) => {
+  try {
+    const { query } = req.query;
+    if (!query) {
+      return res.status(400).json({ message: "Query is required" });
+    }
+    const users = await User.find({
+      // $and: Logical AND operator - ALL conditions inside must be true
+      $and: [
+        // $ne: "Not Equal" operator - excludes documents where _id equals req.userId
+        { _id: { $ne: req.userId } }, // ✅ Exclude current user from results
+
+        // $or: Logical OR operator - AT LEAST ONE condition inside must be true
+        {
+          $or: [
+            // $regex: Regular expression pattern matching operator
+            // $options: "i" makes the regex case-insensitive (ignores upper/lower case)
+            { name: { $regex: query, $options: "i" } }, // ✅ Search in name field (case-insensitive)
+            { username: { $regex: query, $options: "i" } }, // ✅ Search in username field (case-insensitive)
+          ],
+        },
+      ],
+    }).select("-password"); // - (minus) excludes the password field from results
+    return res.status(200).json({ users });
+  } catch (error) {
+    return res.status(500).json({ message: "Error fetching user data" });
+  }
+};
+module.exports = { getCurrentUser, editProfile, getOtherUser, searchUser };

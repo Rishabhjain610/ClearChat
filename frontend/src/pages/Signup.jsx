@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ServerContext1 } from "../context/ServerContext";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "../redux/userSlice";
+import { setUserData,setSelectedUser } from "../redux/userSlice";
 const Signup = () => {
   const [form, setForm] = useState({
     username: "",
@@ -32,7 +32,7 @@ const Signup = () => {
         withCredentials: true,
       });
       dispatch(setUserData(result.data.user));
-
+      dispatch(setSelectedUser(null));
       if (result.data.token) {
         toast.success("Signup successful");
         navigate("/");

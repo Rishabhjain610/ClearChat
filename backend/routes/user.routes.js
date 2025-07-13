@@ -1,10 +1,10 @@
 const express = require('express');
 const UserRouter = express.Router();
-const { getCurrentUser, editProfile,getOtherUser } = require('../controller/user.controller');
+const { getCurrentUser, editProfile,getOtherUser,searchUser } = require('../controller/user.controller');
 const { authCheck } = require('../middleware/auth.middleware');
 const upload = require('../middleware/multer.middleware');
 UserRouter.get('/getUser', authCheck, getCurrentUser);
 UserRouter.put('/profile',authCheck,upload.single('image') ,editProfile);
 UserRouter.get('/getOtherUser', authCheck, getOtherUser);
-
+UserRouter.get('/searchUser', authCheck, searchUser);
 module.exports = UserRouter;
