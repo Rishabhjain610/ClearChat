@@ -1,4 +1,4 @@
-# 🏠 ClearChat (MERN Stack)
+#  ClearChat (MERN Stack)
 A full-stack real-time chat application where users can sign up, log in, create private/public conversations, share media, send instant messages, and more. Built with the MERN stack and modern tools like Multer, Cloudinary, Emoji Picker, and React Toastify.
 
 ---
@@ -45,4 +45,4 @@ A full-stack real-time chat application where users can sign up, log in, create 
 
 ## 📹 Demo
 
-
+https://github.com/user-attachments/assets/1b94d7eb-27e0-4d30-afa6-4d12d88f17c9
